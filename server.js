@@ -13,8 +13,19 @@ const server = express();
 
 server.use(helmet());
 
+let whitelist = ['http://localhost:8080','http://localhost:3000', 'https://secretrecipes.vercel.app/']
 server.use(cors({
-  origin: ['http://localhost:8080','http://localhost:3000', 'https://secretrecipes.vercel.app'],
+  origin: function(origin, callback){
+    // allow requests with no origin
+    if (!origin) {
+        return callback(null, true);
+    }
+    if (whitelist.indexOf(origin) === -1) {
+      var message = 'The CORS policy for this origin doesn\'t allow access from the particular origin.';
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
 }));
 

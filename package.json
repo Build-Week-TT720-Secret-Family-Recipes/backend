@@ -28,6 +28,9 @@
 		"migrate:test": "npx knex migrate:latest --env testing && npx knex seed:run --env testing",
 		"migrate:dev": "npx knex migrate:latest --env development && npx knex seed:run --env development"
 	},
+	"jest": {
+		"testEnvironment": "node"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Build-Week-TT720-Secret-Family-Recipes/backend.git"
